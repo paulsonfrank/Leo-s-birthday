@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday</title>
+
+<style>
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background:
+      radial-gradient(circle at 50% 45%, rgba(255,255,255,.55), transparent 55%),
+      #f8f4ef;
+    color: #183f62;
+    font-family: "Bodoni 72", "Didot", "Baskerville", Georgia, serif;
+  }
+
+  .card {
+    width: min(680px, 100%);
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 52px 30px;
+    text-align: center;
+    background: rgba(248,244,239,.72);
+  }
+
+  .screen {
+    width: 100%;
+    animation: fade .7s ease;
+  }
+
+  h1 {
+    margin: 0 0 32px;
+    font-family: "Bodoni 72", "Didot", "Baskerville", Georgia, serif;
+    font-size: clamp(3rem, 11vw, 6.3rem);
+    line-height: .88;
+    font-weight: 400;
+    letter-spacing: -.025em;
+    color: #183f62;
+  }
+
+  .text {
+    font-size: clamp(1.25rem, 4vw, 1.65rem);
+    line-height: 1.55;
+    letter-spacing: .01em;
+  }
+
+  input {
+    width: min(440px, 100%);
+    margin: 20px 0 12px;
+    padding: 14px 18px;
+    border: none;
+    border-bottom: 1px solid rgba(24,63,98,.5);
+    outline: none;
+    background: transparent;
+    color: #183f62;
+    font: inherit;
+    font-size: 1.25rem;
+    text-align: center;
+  }
+
+  input::placeholder {
+    color: rgba(24,63,98,.52);
+  }
+
+  button {
+    margin-top: 10px;
+    padding: 11px 30px;
+    border: 1px solid rgba(24,63,98,.45);
+    border-radius: 999px;
+    background: transparent;
+    color: #183f62;
+    font: inherit;
+    font-size: 1.15rem;
+    cursor: pointer;
+    transition: .2s ease;
+  }
+
+  button:hover {
+    background: #183f62;
+    color: #f8f4ef;
+  }
+
+  .message {
+    text-align: left;
+    font-size: clamp(1.18rem, 3.7vw, 1.48rem);
+    line-height: 1.75;
+  }
+
+  .message h2 {
+    text-align: center;
+    font-size: clamp(2.5rem, 9vw, 4.7rem);
+    line-height: .95;
+    font-weight: 400;
+    margin: 0 0 38px;
+    color: #183f62;
+  }
+
+  .message p { margin: 0 0 24px; }
+
+  @keyframes fade {
+    from { opacity: 0; transform: translateY(7px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+
+<body>
+<main class="card" id="app"></main>
+
+<script>
+const app = document.getElementById("app");
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function show(content) {
+  app.innerHTML = `<div class="screen">${content}</div>`;
+}
+
+async function start() {
+  show(`
+    <h1>HAPPY 19TH<br>BIGGG GIRLLLLLLL</h1>
+    <div class="text">what's your name cutie?</div>
+    <input id="name" autocomplete="off" autofocus>
+    <br><button id="nameBtn">Enter</button>
+  `);
+
+  document.getElementById("nameBtn").onclick = async () => {
+    const name = document.getElementById("name").value.trim();
+    if (name) await verification(name);
+  };
+}
+
+async function verification(name) {
+  show(`<div class="text">hmmm....</div>`);
+  await sleep(2000);
+
+  show(`<div class="text">identity check in progress, please wait...</div>`);
+  await sleep(3000);
+
+  show(`<div class="text">Bienvenida, senorita!!!!!</div>`);
+  await sleep(2000);
+
+  show(`<div class="text">Warms regards pretty you</div>`);
+  await sleep(3000);
+
+  show(`<div class="text">itseems...</div>`);
+  await sleep(2500);
+
+  show(`<div class="text">you are not on today's special list :(</div>`);
+  await sleep(2500);
+
+  show(`<div class="text">okay...maybe your supposed to be here</div>`);
+  await sleep(2500);
+
+  show(`
+    <div class="text">let's see... what's your fav color?</div>
+    <input id="color" autocomplete="off" autofocus>
+    <br><button id="colorBtn">Continue</button>
+  `);
+
+  document.getElementById("colorBtn").onclick = async () => {
+    if (!document.getElementById("color").value.trim()) return;
+
+    show(`<div class="text">hmmm...</div>`);
+    await sleep(2500);
+
+    show(`<div class="text">okay yes miss, gotchu, very very interesting</div>`);
+    await sleep(2500);
+
+    readyQuestion();
+  };
+}
+
+function readyQuestion() {
+  show(`
+    <div class="text">question, ready big girl??</div>
+    <input id="ready1" autocomplete="off" autofocus>
+    <br><button id="readyBtn">Answer</button>
+  `);
+
+  document.getElementById("readyBtn").onclick = () => {
+    const answer = document.getElementById("ready1").value.trim().toLowerCase();
+
+    if (answer === "yes") {
+      show(`<div class="text">good, preciate it</div>`);
+    } else {
+      show(`<div class="text">pack it up and say yes</div>`);
+    }
+
+    setTimeout(finalReady, 1600);
+  };
+}
+
+function finalReady() {
+  show(`
+    <div class="text">READY OR NOT?</div>
+    <input id="ready2" autocomplete="off" autofocus>
+    <br><button id="ready2Btn">Let's go</button>
+  `);
+
+  document.getElementById("ready2Btn").onclick = () => {
+    const answer = document.getElementById("ready2").value.trim().toLowerCase();
+
+    if (answer === "no") {
+      show(`
+        <div class="text">shut n say yes</div>
+        <br><button id="retryBtn">READY?</button>
+      `);
+      document.getElementById("retryBtn").onclick = finalReady;
+    } else {
+      reveal();
+    }
+  };
+}
+
+async function reveal() {
+  show(`<h1>LESGOOOOO</h1>`);
+  await sleep(2500);
+
+  show(`
+    <section class="message">
+      <h2>Happy birthday pretty soul :)</h2>
+      <p>wishing you a very sweet ass 19th, may all your 11:11 wishes come true</p>
+      <p>i hope this year brings about more joy and hapiness into your life, i want you to smile more, love more and live more</p>
+      <p>make alot of memories, take alot of pictures, stay the same beautiful soul you are, change when people correct you, and never forget to love yourself</p>
+      <p>maybe were distant now, but i hope you know how much i care about you and root for you</p>
+      <p>i hope you have a great day and a great year ahead, and always pray when it gets tough, love you.</p>
+    </section>
+  `);
+}
+
+start();
+</script>
+</body>
+</html>
